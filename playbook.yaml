@@ -1,5 +1,4 @@
-- name: Configure Nginx
-- hosts: server
+- name: Debug
   become: yes
   vars:
     - user_name: "Hello"
