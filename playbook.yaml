@@ -5,7 +5,5 @@
     - user_name: "Hello"
 
   tasks:
-  - name: Prints two lines of messages, but only if there is an environment value set
-    ansible.builtin.debug:
-    msg:
-    - "Hello Mr{{ user_name }}"
+  - debug:
+    msg: "System {{ inventory_hostname }} has uuid {{ ansible_product_uuid }} and say {{ user_name }}"
