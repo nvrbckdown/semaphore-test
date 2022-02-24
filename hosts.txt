@@ -1,3 +1,0 @@
-[server]
-ansible_host=18.156.197.115
-ansible_user=ubuntu
