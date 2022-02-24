@@ -1,4 +1,5 @@
 - name: Debug
+- hosts: server
   become: yes
   vars:
     - user_name: "Hello"
