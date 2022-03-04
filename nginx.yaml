@@ -1,0 +1,12 @@
+---
+- hosts: server
+  become: yes
+
+  tasks:
+    - name: Install nginx webserver
+      apt: 
+        name: ['nginx', 'certbot', 'python3-certbot-nginx'] 
+        state: present
+
+    - name: Restart nginx
+      service: name=nginx state=restarted

@@ -1,0 +1,11 @@
+# SECURITY
+# SSH configuration file (sshd_config)
+SSH_PORT: 22                  # default 22
+PERMIT_ROOT_LOGIN: "yes"         # yes/no (default yes)
+PASS_AUTH: "no"                  # PasswordAuthentification (default yes)
+
+user: USERNAME
+password: PASSWORD
+ssh_key_filename: "{{ ansible_hostname }}"
+pemfile_path: PATH
+

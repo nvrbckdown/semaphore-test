@@ -1,0 +1,24 @@
+---
+- hosts: server
+  become: yes
+
+  tasks:
+    - name: Ensure bash, OpenSSl, and libssl are the latest versions
+      apt: name={{ item }} update_cache=true state=present
+      with_items:
+        - bash
+        - openssl
+        - libssl-dev
+        - libssl-doc
+        - python3-psycopg2
+      tags: packages
+
+    - name: Install PostgreSQL
+      apt: name={{ item }} update_cache=true state=present
+      with_items:
+        - postgresql
+        - postgresql-contrib
+        - libpq-dev
+
+    - name: Ensure the PostgreSQL service is running
+      service: name=postgresql state=started enabled=yes

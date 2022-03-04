@@ -1,0 +1,39 @@
+---
+- hosts: server
+  become: yes
+
+  tasks:
+    - name: Install aptitude using apt
+      remote_user: "{{ ansible_user }}"
+      apt: name=aptitude state=latest update_cache=yes force_apt_get=yes
+
+    - name: Install required system packages
+      apt: name={{ item }} state=latest update_cache=yes
+      loop: [ 'apt-transport-https', 'ca-certificates', 'curl', 'software-properties-common' ]
+
+    - name: Add Docker GPG apt Key
+      remote_user: "{{ ansible_user }}"
+      apt_key:
+      url: https://download.docker.com/linux/ubuntu/gpg
+      state: present
+
+    - name: Add Docker Repository
+      remote_user: "{{ ansible_user }}"
+      apt_repository:
+      repo: deb https://download.docker.com/linux/ubuntu bionic stable
+      state: present
+
+    - name: Update apt and install docker-ce
+      remote_user: "{{ ansible_user }}"
+      apt: update_cache=yes name=docker-ce state=latest
+
+    - name: Add remote "ubuntu" user to "docker" group
+      remote_user: "{{ ansible_user }}"
+      user: name="{{ ansible_user }}" group="docker" append=yes
+
+    - name: Install docker-compose
+      remote_user: "{{ ansible_user }}"
+      get_url: 
+      url : https://github.com/docker/compose/releases/download/1.25.1-rc1/docker-compose-Linux-x86_64
+      dest: /usr/local/bin/docker-compose
+      mode: 'u+x,g+x'
