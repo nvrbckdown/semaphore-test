@@ -24,7 +24,7 @@
 - name: Get .pem file from remote server
   fetch:
     src: "~/.ssh/{{ ssh_key_filename }}"
-    dest: "~/{{ pemfile_path }}/{{ ssh_key_filename}}.pem"
+    dest: "{{ pemfile_path }}/{{ ssh_key_filename}}.pem"
     mode: 0400
     flat: yes
   become: yes
