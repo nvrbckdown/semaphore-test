@@ -14,26 +14,26 @@
     - name: Add Docker GPG apt Key
       remote_user: "{{ ansible_user }}"
       apt_key:
-      url: https://download.docker.com/linux/ubuntu/gpg
-      state: present
+        url: https://download.docker.com/linux/ubuntu/gpg
+        state: present
 
     - name: Add Docker Repository
       remote_user: "{{ ansible_user }}"
       apt_repository:
-      repo: deb https://download.docker.com/linux/ubuntu bionic stable
-      state: present
+        repo: deb https://download.docker.com/linux/ubuntu bionic stable
+        state: present
 
     - name: Update apt and install docker-ce
       remote_user: "{{ ansible_user }}"
       apt: update_cache=yes name=docker-ce state=latest
 
-    - name: Add remote "ubuntu" user to "docker" group
+    - name: Add remote "ubuntu" ansible_user to "docker" group
       remote_user: "{{ ansible_user }}"
       user: name="{{ ansible_user }}" group="docker" append=yes
 
     - name: Install docker-compose
       remote_user: "{{ ansible_user }}"
       get_url: 
-      url : https://github.com/docker/compose/releases/download/1.25.1-rc1/docker-compose-Linux-x86_64
-      dest: /usr/local/bin/docker-compose
-      mode: 'u+x,g+x'
+        url : https://github.com/docker/compose/releases/download/1.25.1-rc1/docker-compose-Linux-x86_64
+        dest: /usr/local/bin/docker-compose
+        mode: 'u+x,g+x'
