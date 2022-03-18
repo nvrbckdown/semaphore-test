@@ -1,0 +1,5 @@
+---
+- name: Install essential commands on Ubuntu
+  apt:
+    name: ['net-tools', 'tree', 'ncdu', 'neofetch', 'vim', 'mosh', 'tmux', 'htop', 'curl', 'wget', 'unzip', 'zip', 'gcc', 'build-essential', 'make']
+    state: present

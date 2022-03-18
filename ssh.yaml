@@ -9,14 +9,14 @@
       name: "{{ user }}" 
       generate_ssh_key: yes
       ssh_key_type: rsa
-      ssh_key_bits: 4096
-      ssh_key_file: ".ssh/{{ ssh_key_filename }}"
+      ssh_key_bits: 2048
+      ssh_key_file: ".ssh/{{ ansible_hostname }}"
       force: no
       become: yes
 
   - name: Copy ssh-key to authorized_keys
     copy:
-      src: "~/.ssh/{{ ssh_key_filename }}.pub"
+      src: "~/.ssh/{{ ansible_hostname }}.pub"
       dest: "~/.ssh/authorized_keys"
       owner: "{{ user }}"
       group: "{{ user }}"
@@ -27,8 +27,8 @@
             
   - name: Get .pem file from remote server
     fetch:
-      src: "~/.ssh/{{ ssh_key_filename }}"
-      dest: "{{ pemfile_path }}/{{ ssh_key_filename}}.pem"
+      src: "~/.ssh/{{ ansible_hostname }}"
+      dest: "{{ pemfile_path }}/{{ ansible_hostname}}.pem"
       mode: 0400
       flat: yes
       become: yes

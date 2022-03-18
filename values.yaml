@@ -1,11 +1,21 @@
+nginx: nginx # by default latest, for version use nginx=1.18*
+user: udevs
+password: 
+ssh_key_filename: "{{ ansible_hostname }}"
+pemfile_path: /home/udevs
+
 # SECURITY
 # SSH configuration file (sshd_config)
 SSH_PORT: 22                  # default 22
 PERMIT_ROOT_LOGIN: "yes"         # yes/no (default yes)
-PASS_AUTH: "no"                  # PasswordAuthentification (default yes)
+PASS_AUTH: "yes"                  # PasswordAuthentification (default yes)
 
-user: USERNAME
-password: PASSWORD
-ssh_key_filename: "{{ ansible_hostname }}"
-pemfile_path: PATH
+zsh_check: false
+user_check: false
+ssh_key_check: false
+nginx_check: false
+es_commands_check: false
+docker_check: false
+postgresql_check: false
+ufw_check: false
 
