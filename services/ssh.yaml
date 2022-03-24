@@ -7,7 +7,6 @@
     ssh_key_bits: 4096
     ssh_key_file: ".ssh/{{ ssh_key_filename }}"
     force: no
-  become: yes
   become_user: "{{ user }}"
   
 - name: Copy ssh-key to authorized_keys
@@ -18,16 +17,14 @@
     group: "{{ user }}"
     mode: 0664
     remote_src: yes
-  become: yes
   become_user: "{{ user }}"
     
 - name: Get .pem file from remote server
   fetch:
     src: "~/.ssh/{{ ssh_key_filename }}"
-    dest: "{{ pemfile_path }}/{{ ssh_key_filename}}.pem"
+    dest: "~/{{ pemfile_path }}/{{ ssh_key_filename}}.pem"
     mode: 0400
     flat: yes
-  become: yes
   become_user: "{{ user }}"
 
 - name: Configure SSH
