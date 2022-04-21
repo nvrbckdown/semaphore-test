@@ -1,0 +1,6 @@
+---
+dbs:
+    - db_name: ansible_test_port
+      db_user: ansible_test_user
+      db_password: ansible_123
+      db_port: 2354

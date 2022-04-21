@@ -1,0 +1,24 @@
+---
+  - name: "Create {{ item.db_name }} database"
+    postgresql_db:
+      state: present
+      name: "{{ item.db_name }}"
+      port: "{{ item.db_port }}"
+    become_user: postgres
+
+  - name: "Create {{ item.db_name }} {{ item.db_user }} with {{ item.db_password }}"
+    postgresql_user:
+      state: present
+      name: "{{ item.db_user }}"
+      port: "{{ item.db_port }}"
+      password: "{{ item.db_password }}"
+    become_user: postgres
+
+  - name: "Grant db {{ item.db_user }} access to {{ item.db_name }} db"
+    postgresql_privs:
+      type: database
+      database: "{{ item.db_name }}"
+      port: "{{ item.db_port }}"
+      roles: "{{ item.db_user }}"
+      privs: ALL
+    become_user: postgres

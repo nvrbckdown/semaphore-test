@@ -1,0 +1,9 @@
+- name: Create Postgres dbs
+  hosts: server
+  become: true
+  vars_files: db_values.yaml
+
+  tasks:
+  - name: asd
+    include_tasks: services/pg_db.yaml
+    with_items: "{{ dbs }}"
